@@ -10,14 +10,13 @@ router.get('/notes', (req, res) => {
 
 router.post('/notes', (req, res) => {
     const newNote = req.body
-    console.group(newNote)
     newNote.id = uuidv4()
     db.push(newNote)
+    console.log(db)
     fs.writeFileSync(
         "./db/db.json", JSON.stringify(db),
         (err) => err && console.error(err));
-    res.json(true)
-    return newNote
+    res.json(db)
 });
 
 router.delete('/notes/:id', (req, res) => {
